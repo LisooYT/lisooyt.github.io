@@ -3,156 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="LisooYT's GitHub-style profile page. Explore projects, skills, and connect for collaborations!">
+    <meta name="description" content="LisooYT's GitHub-style profile page with neon effects and typing animation.">
     <title>LisooYT's GitHub Profile</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             height: 100vh;
+            background: black;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-            position: relative;
+            font-family: "Courier New", monospace;
             overflow: hidden;
+            position: relative;
+            color: white;
+        }
+
+        /* Neon green glow at top and bottom */
+        body::before, body::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            background: radial-gradient(circle, rgba(0, 255, 0, 0.4), transparent);
+            filter: blur(30px);
+        }
+
+        body::before {
+            top: 0;
+        }
+
+        body::after {
+            bottom: 0;
         }
 
         .container {
             text-align: center;
+            position: relative;
             z-index: 1;
         }
 
-        .content {
-            position: relative;
-            z-index: 2;
-            color: white;
-        }
-
+        /* Neon glow for the title */
         h1 {
-            font-size: 3em;
+            font-size: 3.5em;
             font-weight: bold;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
-            margin: 20px;
-            animation: textFromShadows 2s ease-out forwards;
+            text-transform: uppercase;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
             opacity: 0;
+            animation: fadeIn 2s ease-out forwards;
         }
 
-        .about {
-            font-size: 1.5em;
-            line-height: 1.8em;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-        }
-
-        ul {
-            padding: 0;
-            list-style: none;
-            text-align: left;
-            display: inline-block;
-            font-size: 1.2em;
-        }
-
-        .chessboard {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            grid-template-rows: repeat(8, 1fr);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50vmin; /* Ensure the chessboard is always square */
-            height: 50vmin;
-            margin: auto;
-            z-index: 0;
-            box-shadow: 0 -20px 30px rgba(0, 0, 0, 0.5), 0 20px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .chessboard div {
-            transition: transform 0.3s ease;
-        }
-
-        .chessboard div:hover {
-            transform: scale(1.1);
-        }
-
+        /* Typing effect styles */
         .typing-effect {
             font-size: 1.5em;
             font-weight: bold;
-            font-family: "Courier New", monospace;
-            color: white;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00;
             overflow: hidden;
             white-space: nowrap;
-            border-right: 2px solid white;
+            border-right: 2px solid #00ff00;
             width: 0;
-            animation: typing 3s steps(30, end), blink 0.5s step-end infinite;
+            animation: typing 3s steps(30, end) forwards, blink 0.5s step-end infinite;
         }
 
-        @keyframes textFromShadows {
+        @keyframes fadeIn {
             0% {
                 opacity: 0;
-                text-shadow: 0px 0px 50px rgba(0, 0, 0, 1);
+                transform: translateY(-50px);
             }
             100% {
                 opacity: 1;
-                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+                transform: translateY(0);
             }
         }
 
         @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
         }
 
         @keyframes blink {
-            from, to { border-color: transparent; }
-            50% { border-color: white; }
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
+            from, to {
+                border-color: transparent;
             }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            .about {
-                font-size: 1em;
-            }
-
-            .chessboard {
-                width: 90vmin;
-                height: 90vmin;
+            50% {
+                border-color: #00ff00;
             }
         }
     </style>
 </head>
 <body>
-    <div class="chessboard" id="chessboard"></div>
-
     <div class="container">
-        <div class="content">
-            <h1>LisooYT</h1>
-            <p class="typing-effect" id="typed-text"></p>
-        </div>
+        <!-- Title -->
+        <h1>LisooYT</h1>
+
+        <!-- Typing Effect Text -->
+        <p class="typing-effect" id="typed-text"></p>
     </div>
 
     <script>
-        // Dynamically create the chessboard
-        const chessboard = document.getElementById('chessboard');
-        for (let i = 0; i < 64; i++) {
-            const square = document.createElement('div');
-            square.style.backgroundColor = (Math.floor(i / 8) + (i % 8)) % 2 === 0 ? 'black' : 'white';
-            chessboard.appendChild(square);
-        }
-
-        // Typing effect for text
+        // Typing effect content
+        const text = "Welcome to my profile! About me:";
         const typedText = document.getElementById('typed-text');
-        const text = "Welcome to my profile! Here are a few things about me:\n- Passionate about coding and technology.\n- Love building cool projects and sharing knowledge.\n- Looking to collaborate with others!";
         let index = 0;
 
+        // Function to simulate typing effect
         function type() {
             if (index < text.length) {
                 typedText.textContent += text.charAt(index);
@@ -161,7 +122,8 @@
             }
         }
 
-        type();
+        // Start typing after a short delay
+        setTimeout(type, 2000); // Delay to match title fade-in animation
     </script>
 </body>
 </html>
