@@ -3,47 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My GitHub Website</title>
+    <meta name="description" content="LisooYT's GitHub-style profile page. Explore projects, skills, and connect for collaborations!">
+    <title>LisooYT's GitHub Profile</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: #f0f0f0;
-            color: #333;
+            font-family: Arial, sans-serif;
             position: relative;
+            overflow: hidden;
         }
 
-        header {
-            background: linear-gradient(to bottom, rgba(0, 128, 0, 0.8), rgba(0, 0, 0, 0.8));
-            padding: 20px;
+        .container {
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 128, 0, 0.5);
+            z-index: 1;
         }
 
-        .title {
-            font-size: 2.5em;
-            background: linear-gradient(to right, #00ff00, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 2px 2px 4px rgba(0, 128, 0, 0.7);
+        .content {
+            position: relative;
+            z-index: 2;
+            color: white;
         }
 
-        main {
-            padding: 20px;
+        h1 {
+            font-size: 3em;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+            margin: 20px;
+            animation: textFromShadows 2s ease-out forwards;
+            opacity: 0;
         }
 
         .about {
-            margin: 20px 0;
+            font-size: 1.5em;
+            line-height: 1.8em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+            text-align: left;
+            display: inline-block;
+            font-size: 1.2em;
         }
 
         .typing-effect {
-            font-family: 'Courier New', Courier, monospace;
-            white-space: nowrap;
+            font-size: 1.5em;
+            font-weight: bold;
+            font-family: "Courier New", monospace;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
             overflow: hidden;
-            border-right: 3px solid green;
+            white-space: nowrap;
+            border-right: 2px solid white;
             width: 0;
-            animation: typing 4s steps(30, end), blink-caret 0.75s step-end infinite;
+            animation: typing 3s steps(30, end), blink 0.5s step-end infinite;
+        }
+
+        /* Enhanced Green Shadow effect */
+        .shadow-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2); /* Transparent overlay */
+            box-shadow: 
+                0px 10px 30px rgba(0, 255, 0, 0.8),
+                0px -10px 30px rgba(0, 255, 0, 0.8),  /* Green shadow at the top and bottom */
+                0px 20px 40px rgba(0, 255, 0, 0.6); /* Increased blur for better effect */
+            z-index: 0;
+        }
+
+        @keyframes textFromShadows {
+            0% {
+                opacity: 0;
+                text-shadow: 0px 0px 50px rgba(0, 0, 0, 1);
+            }
+            100% {
+                opacity: 1;
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+            }
         }
 
         @keyframes typing {
@@ -51,34 +97,51 @@
             to { width: 100%; }
         }
 
-        @keyframes blink-caret {
+        @keyframes blink {
             from, to { border-color: transparent; }
-            50% { border-color: green; }
+            50% { border-color: white; }
         }
 
-        footer {
-            text-align: center;
-            padding: 10px;
-            background: linear-gradient(to top, rgba(0, 128, 0, 0.8), rgba(0, 0, 0, 0.8));
-            box-shadow: 0 -4px 10px rgba(0, 128, 0, 0.5);
-            position: relative;
-            bottom: 0;
-            width: 100%;
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .about {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1 class="title">Welcome to My GitHub Page</h1>
-    </header>
-    <main>
-        <section class="about">
-            <h2>About Me</h2>
-            <p class="typing-effect">I am a passionate developer who loves coding and creating amazing projects.</p>
-        </section>
-    </main>
-    <footer>
-        <p>© 2023 My GitHub Website</p>
-    </footer>
+    <div class="shadow-effect"></div> <!-- Green shadow overlay -->
+    
+    <div class="container">
+        <div class="content">
+            <h1>LisooYT</h1>
+            <p class="typing-effect" id="typed-text"></p>
+        </div>
+    </div>
+
+    <script>
+        // Typing effect for text
+        const typedText = document.getElementById('typed-text');
+        const text = "Welcome to my profile! Here are a few things about me:\n- Passionate about coding and technology.\n- Love building cool projects and sharing knowledge.\n- Looking to collaborate with others!";
+        let index = 0;
+
+        function type() {
+            if (index < text.length) {
+                typedText.textContent += text.charAt(index);
+                index++;
+                setTimeout(type, 50); // Adjust typing speed
+            }
+        }
+
+        type();
+    </script>
 </body>
 </html>
