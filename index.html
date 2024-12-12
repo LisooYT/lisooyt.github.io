@@ -14,17 +14,18 @@
             align-items: center;
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
+            position: relative;
         }
 
         .container {
             text-align: center;
-            color: white;
             z-index: 1;
         }
 
         .content {
             position: relative;
             z-index: 2;
+            color: white;
         }
 
         h1 {
@@ -50,12 +51,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
-        }
-
-        .chessboard div {
-            width: 50px;
-            height: 50px;
+            z-index: 0;
         }
 
         .chessboard div:nth-child(odd) {
@@ -77,10 +73,29 @@
     </style>
 </head>
 <body>
+    <div class="chessboard">
+        <!-- Chessboard grid dynamically created with CSS -->
+        <!-- 64 squares -->
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
     <div class="container">
-        <div class="chessboard">
-            <!-- Chessboard grid will be dynamically created using CSS -->
-        </div>
         <div class="content">
             <h1>LisooYT</h1>
-            <p class="about">
+            <p class="about">Welcome to my profile! Here are a few things about me:</p>
+            <ul class="about">
+                <li>Passionate about coding and technology.</li>
+                <li>Love building cool projects and sharing knowledge.</li>
+                <li>Looking to collaborate with others!</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
